@@ -13,7 +13,7 @@ At the time of this writing, Ignite CLI scaffolded and developed modules for ver
 ### 0.47.x Modules
 For the sake of keeping this document short and readable, please find the details at this link:
 
-[Building a module in Cosmos SDK instead of Ignite CLI](/BuildingCosmosModule.md)
+[Building a module in Cosmos SDK instead of Ignite CLI](/cosmos/BuildingCosmosModule.md)
 
 ## Learn more
 
