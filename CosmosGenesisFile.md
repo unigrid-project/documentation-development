@@ -65,6 +65,12 @@ Mint:
 * inflation_rate_change
 * mint_denom
 
+UGDMint:
+* subsidy_halving_interval
+* blocks_per_year
+* goal_bonded
+* mint_denom
+
 Slashing:
 * downtime_jail_duration
 * min_signed_per_window
