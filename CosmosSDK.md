@@ -8,7 +8,7 @@ Some general notes and tips related to working with [Cosmos SDK](https://tutoria
 * [Learn more](#learn-more) - Additional Links
 
 ## Working with version 0.47.x
-At the time of this writing, Ignite CLI scaffolded and developed modules for version v0.46.7, so to develop a module to work with Cosmost SDK v0.47.x, we had to build the module in Cosmos SDK itself without Ignite scaffolding.
+At the time of this writing, Ignite CLI scaffolded and developed modules for version v0.46.7, so to develop a module to work with Cosmos SDK v0.47.x, we had to build the module in Cosmos SDK itself without Ignite scaffolding.
 
 ### 0.47.x Modules
 For the sake of keeping this document short and readable, please find the details at this link:

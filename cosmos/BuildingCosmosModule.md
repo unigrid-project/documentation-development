@@ -35,9 +35,10 @@ I'm not sure if it creates the folders in proto gen or if they need to be there 
 		- README.md
 
 ### Protobuf files
-Protobuf files define three things basically.
+Protobuf files define four things basically.
 
-* [The state data structure of your module](#protobuf-state).
+* [Your module config object](#protobuf-module)
+* [The state data structure of your module](#protobuf-state)
 * [The query api of your module for gRPC, Rest, and CLI](#protobuf-query)
 * [The message api which can set parameters](#protobuf-messages)
 
@@ -48,6 +49,32 @@ I am no protobuf expert so I invite you to visit some of these links:
 * Msg proto in Cosmos SDK docs [Msg Services](https://docs.cosmos.network/v0.47/building-modules/messages-and-queries#msg-services)
 * [Messages and Queries](https://docs.cosmos.network/v0.47/building-modules/messages-and-queries)
 * [Guidelines for protobuf message definitions](https://docs.cosmos.network/v0.47/core/encoding#guidelines-for-protobuf-message-definitions)
+
+#### Protobuf Module
+To be honest, I know very little about this protobuf file other than it is necessary to build a v1 module.  If someone has more info, please edit and update this.
+
+Example module.proto:
+
+proto/cosmos/`<module-name>`/module/v1/module.proto
+``` protobuf
+syntax = "proto3";
+
+package cosmos.ugdmint.module.v1;
+
+import "cosmos/app/v1alpha1/module.proto";
+
+// Module is the config object of the ugdmint module.
+message Module {
+  option (cosmos.app.v1alpha1.module) = {
+    go_import: "github.com/cosmos/cosmos-sdk/x/ugdmint"
+  };
+
+  string fee_collector_name = 1;
+
+  // authority defines the custom module authority. If not set, defaults to the governance module.
+  string authority = 2;
+}
+```
 
 #### Protobuf State
 There are generally one or two files for defining the module state:
@@ -239,14 +266,105 @@ message MsgUpdateParamsResponse {}
 ```
 
 ### Generate Go Code
+This step requires that you have Docker on your system.
 
+From the project root:
+``` shell
+make proto-all
+```
+This will lint and generate the Go code to:
 
+- api
+	- cosmos
+		- `<module-name>`
+
+and the location specified in your proto files
+
+``` protobuf
+option go_package = "github.com/cosmos/cosmos-sdk/x/<module-name>/types"
+```
 
 ### API files
 I'm not sure entirely all of what the API generated files are for.  Might be a good research project.  But at least the `api/cosmos/<module-name>/module/v1/module.pulsar.go` file needs to be referenced for the whole thing to work.  I tied referencing it by local relative path but did not have success, so I pushed the api folder up to my repo to reference it there.
 
+I copied all of the `api/cosmos/<module-name>` folder into my module repo at `api/cosmos/<module-name>`.  This has to be posted online to be referenced by `simapp` in the next step.
+
 ### Add module
-Ignite scaffolding did a lot of this for us but we'll have to do it by hand. Our new module needs to be added to some if not all of the following files in `/simapp` folder:
+Ignite scaffolding did a lot of this for us but we'll have to do it by hand. 
+
+Basically, our module needs to be registered into simapp and the execution order of some hooks set.  Our new module needs to be added to some if not all of the following files in `/simapp` folder:
+
+- simapp
+	- app.go
+	- app_config.go
+	- app_v2.go
+
+#### App.go
+Add your module to imports:
+``` go
+import (
+	...
+	"github.com/cosmos/cosmos-sdk/x/<module-name>"
+	<module-name>keeper "github.com/cosmos/cosmos-sdk/x/<module-name>/keeper"
+	<module-name>types "github.com/cosmos/cosmos-sdk/x/<module-name>/types"
+)
+```
+Add your module to ModuleBasics:
+``` go
+	ModuleBasics = module.NewBasicManager(
+		...
+		<module-name>.AppModuleBasic{},
+	)
+```
+Adding your module keeper to SimApp may not seem necessary unless you want to reference your module keeper from other modules, but it is later created and referenced by your own module in `NewSimApp`.
+``` go
+type SimApp struct {
+	...
+	// keepers
+	...
+	<module-name>Keeper    <module-name>keeper.Keeper
+	...
+}
+```
+Most of the registering and creating happens in `NewSimApp`
+``` go
+func NewSimApp(
+	...
+) *SimApp {
+	...
+	keys := sdk.NewKVStoreKeys(
+		... <module-name>types.StoreKey, ...
+	)
+	...
+	app.<module-name>Keeper = <module-name>keeper.NewKeeper(appCodec, keys[<module-name>types.StoreKey], ...)
+	...
+	app.ModuleManager = module.NewManager(
+		...
+		<module-name>.NewAppModule(appCodec, app.<module-name>Keeper, ...),
+	)
+	app.ModuleManager.SetOrderBeginBlockers(
+		... <module-name>types.ModuleName, ...
+	)
+	app.ModuleManager.SetOrderEndBlockers(
+		... <module-name>types.ModuleName, ...
+	)
+	genesisModuleOrder := []string{
+		... <module-name>types.ModuleName, ...
+	}
+}
+```
+Lastly if your module has params, we create a subspace for them here:
+``` go
+func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey storetypes.StoreKey) paramskeeper.Keeper {
+	...
+	paramskeeper.Subspace(<module-name>types.ModuleName)
+	...
+}
+```
+
+#### App_config.go
+
+#### App_v2.go
 
 ### Develop
 There is still much to do to develop the module out.  Go through the tutorials and documentation in [Cosmos SDK](docs.cosmos.network/v0.47) to learn more.  Definitely look at the source code of the other Cosmos modules and even copy code to help flesh out your module.  When the module code is ready to run, follow these general steps:
