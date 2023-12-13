@@ -204,6 +204,13 @@ For more information, refer to the [Hermes documentation](https://hermes.informa
 
 To start relaying packets between the configured chains, simply run the `hermes start &> hermes.log` command. Hermes will continuously monitor the chains for IBC events and relay packets accordingly.
 
+## Get tokens
+Before opening the channels we need to fund our accounts. For the `theta-testnet-001` Hub testnet chain we can do that from their [discord](https://discord.gg/invite/cosmosnetwork) channel. Find the `#🚰┇testnet-faucet ` channel. In there we can send a command like this to receive testnet tokens.
+
+```bash
+$request theta-testnet-001 cosmos1jzsje4eyqesssp903mw5u9lawmry3renkjvehw
+```
+
 ## Open IBC channel
 
 ```bash
