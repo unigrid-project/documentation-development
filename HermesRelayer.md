@@ -21,7 +21,19 @@ tar -C $HOME/.hermes/bin/ -vxzf $ARCHIVE_NAME
 3. Update your system's PATH environment variable to include the Hermes binary directory to enable access from the command line:
 
 ```bash
+nano ~/.bashrc
+```
+
+```bash
 export PATH="$HOME/.hermes/bin:$PATH"
+```
+
+```bash
+source ~/.bashrc
+```
+
+```bash
+hermes --help
 ```
 
 **Verifying Installation**
