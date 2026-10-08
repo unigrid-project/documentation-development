@@ -13,7 +13,7 @@ answer for it exactly as if you had typed every character yourself.
  * Check changes to tests. A test that was changed to make the build pass proves nothing.
 
 ## Banned tools
- * **GitHub Copilot is banned** in this repository. Do not use it for completions, chat or review, and do not let it open or
+ * **GitHub Copilot is banned** in this organization. Do not use it for completions, chat or review, and do not let it open or
    comment on pull requests.
  * **Weaker, low-tier models are banned.** Small, fast and cheap models produce plausible code that breaks the design in subtle
    ways. If you use AI, use a current top-tier model.
