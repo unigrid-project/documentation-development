@@ -4,22 +4,27 @@ Some general commit and contribution instructions for everybody working at Unigr
 ## Commit messages and log
 It is important that the work in the log can be followed. Please keep your commits short if you can and write messages that
 clearly describe what the commit changes or implements.
- * Commit messages should have a max width of 75 characters and follow the following format. Here we marked the right 75
-   character column with a pipe character `|`:
+ * Commit messages should have a max width of 75 characters on every line, subject and body, and follow the following
+   format. Here we marked the right 75 character column with a pipe character `|`:
    ```
-   Add the ability to fart around                                           |
+   Add retry handling to the spork publisher                                |
                                                                             |
    If needed, this is a more in-depth description of what the change        |
    briefly covered in the descriptive commit message. We can write as much  |
    as we want here, but ideally it should be a maximum of 7 rows, as this   |
    is something that a lot of git log viewers optimize for.                 |
    ```
+ * Write the subject line in the imperative present tense and start it with an uppercase letter: *Add*, *Fix*, *Remove*,
+   *Update* - not *Added*, *Fixes* or *Adding*. A good subject completes the sentence "If applied, this commit will ...".
+ * Do not use prefixes such as `feat:`, `fix:`, `docs:` or `chore:` (conventional commits). Describe the change in plain words.
  * Make small commits. When you sit and work it's good practice to make continous commits to describe your thought process
    and how you have worked. If someone needs to familiarize themselves with your code, this also makes things a lot easier
    for them. You can use tools such as `git gui` to assemble short and understandable commits.
  * What if you need to clean up your log? Maybe you have commits that you want to merge with another commit. Maybe there
    is a commit message that isn't complete enough or has a typo? For this, `git rebase --interactive` can help you. It
-   allows you to interactively make changes to your log, remove commits, change them, squash them and more.
+   allows you to interactively make changes to your log, remove commits, change them, squash them and more. A rewritten
+   branch that is already pushed has to be pushed again with `git push --force-with-lease`, which refuses to overwrite
+   work somebody else added in the meantime. Never force push `master`.
 
 ## Branches
 When working with branches, there are a number conventions to consider:
