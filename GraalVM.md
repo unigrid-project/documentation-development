@@ -1,7 +1,22 @@
 # GraalVM
 Some general notes and tips and tricks for [GraalVM](https://www.graalvm.org/).
 
-For official documentation, visit https://www.graalvm.org/22.2/docs/.
+For official documentation, visit https://www.graalvm.org/latest/docs/.
+
+## How Hedgehog uses GraalVM
+Hedgehog requires Java 25 and GraalVM 25 (`GRAALVM_HOME`) for the native build. The whole program is not compiled to native code,
+as the CDI container (Weld) builds objects at run time, which ahead-of-time compilation does not support without extensive
+configuration. Instead, GraalVM compiles a small launcher in the `native-image` module. The launcher embeds a jlink trimmed Java
+runtime together with the Hedgehog jar (`BundleFeature`), unpacks it on the first start (`Unzipper`) and starts Hedgehog on it.
+
+```
+cd native-image
+mvn package
+```
+
+The result is `native-image/target/hedgehog.bin`, or `hedgehog.exe` on Windows. The native bindings described below are only used
+by the launcher, e.g to find the Windows known folders in `windows/Shell32Wrapper.java` and `windows/Ole32Wrapper.java`. The wiki
+page *Build, testing and native image* of Hedgehog describes the full build.
 
 ## Some interesting resources on the Internet
 [OpenGL demo using GraalVM](https://www.praj.in/posts/2020/opengl-demo-using-graalvm/)
