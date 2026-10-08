@@ -42,8 +42,11 @@ We recommend [Vim](https://www.vim.org/) or [GNU Emacs](https://www.gnu.org/soft
 well.
 
 [spyc](https://github.com/adeptum-labs/spyc) is a terminal viewer for browsing code bases, and the tool we recommend for coding
-with AI and for reviewing what it produces. It shows the project overview, the files as a tree, the code with colors, the history
-and blame from git, all uncommitted changes as one diff and what the tests ran from the coverage reports. See the
+with AI and for reviewing what it produces. It is useful whether AI is used or not, but especially important when it is. It shows the project overview, the files as a tree, the code with colors, the history
+and blame from git, all uncommitted changes as one diff and what the tests ran from the coverage reports. Press `G` for the
+dependency graph, where the packages of the project are drawn as layered boxes with what depends on something above it, and
+`c` in the graph finds dependency cycles. Java, Kotlin, Python, JavaScript, TypeScript, Go, Rust, C and C++ are read, and test
+files are left out until `t` shows them. See the
 [AI Code of Conduct](AICodeOfConduct.md) for how to use it when reviewing.
 
 ## Technology stack
