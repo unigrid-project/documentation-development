@@ -14,6 +14,12 @@ Add Lombok to the pom.xml as a provided dependency
 </dependency>
 ```
 
+In a module with a `module-info.java`, like Hedgehog, Lombok is only needed at compile time
+
+```
+requires static lombok;
+```
+
 Add a `lombok.config` in the project root
 
 ```
