@@ -12,6 +12,15 @@ answer for it exactly as if you had typed every character yourself.
  * Review AI output more critically than a colleague's, not less. It is always confident, whether it is right or wrong.
  * Check changes to tests. A test that was changed to make the build pass proves nothing.
 
+## Recommended tool
+We recommend [spyc](https://github.com/adeptum-labs/spyc) for coding with AI and for reviewing what it produces. It is a terminal
+viewer for code bases that shows the project overview, the code with syntax colors and the history from git. For reviewing AI
+output, these keys are the most useful:
+ * `g` shows all uncommitted changes, staged or not, and new files, as one diff. Go through it before every commit.
+ * `c` shows what the tests ran, from the coverage reports, so you can see whether the new code is tested at all.
+ * `b` shows who last changed each line and `l` the commit log with the diff of each commit.
+ * `d` and `t` jump to a definition, so you can check that a method the AI calls really exists and does what it claims.
+
 ## Banned tools
  * **GitHub Copilot is banned** in this organization. Do not use it for completions, chat or review, and do not let it open or
    comment on pull requests.

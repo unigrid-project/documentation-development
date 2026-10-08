@@ -22,7 +22,7 @@ you would fix the code.
 	* [Hedgehog](Hedgehog.md) - Multi sign of grid sporks
 	* [Janus Config](JanusConfig.md) - JVM options and modules of the installed Janus wallet
 * [Learning](#learning)
-	* [Resources](Resources.md) - Books to read
+	* [Resources](Resources.md) - Books to read, tools and the technology stack
 
 ## Working together
 Start with [Committing](Committing.md). It tells you how to write commit messages, how to name branches and when to rebase instead
@@ -39,7 +39,7 @@ Practical how-to notes for the projects. [Hedgehog](Hedgehog.md) explains how a 
 keys, and [Janus Config](JanusConfig.md) explains how the options of the installed wallet are set.
 
 ## Learning
-The [Resources](Resources.md) document lists books that teach the Jakarta EE stack we build on.
+The [Resources](Resources.md) document lists the books to read, the tools we recommend and the technology stack to get familiar with.
 
 ## Contributing
 Keep the documents short and practical, with commands and snippets that can be copied. Check statements against the code of the

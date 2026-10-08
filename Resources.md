@@ -1,5 +1,5 @@
 # Resources
-Some resources for learning the technologies we work with.
+Some resources for learning the technologies and the craft we work with.
 
 ## Books to read
 
@@ -11,6 +11,24 @@ Covers most of the basics needed to learn how to work with Java and Jakarta Ente
 
 <br clear="left"/><br/>
 
+<img align="left" width="110" height="auto" alt="Java in a Nutshell" src="images/java-in-a-nutshell.jpg" />
+
+[Java in a Nutshell](https://www.amazon.com/dp/1492037257)
+
+Great book covering the essentials of Java. A good entry-point when you need to learn the syntax but already know the basics of other language(s).
+
+<br clear="left"/><br/>
+
+## Software design books
+
+<img align="left" width="110" height="auto" alt="Clean Code" src="images/clean-code.jpg" />
+
+[Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.com/dp/0132350882)
+
+Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way.
+
+<br clear="left"/><br/>
+
 <img align="left" width="110" height="auto" alt="The Inmates Are Running the Asylum" src="images/inmates-asylum.jpg" />
 
 [The Inmates Are Running the Asylum](https://www.amazon.com/dp/0672326140)
@@ -19,3 +37,18 @@ Alan Cooper on why high-tech products are so hard to use, and how designing for 
 
 <br clear="left"/><br/>
 
+## Tools
+We recommend [Vim](https://www.vim.org/) or [GNU Emacs](https://www.gnu.org/software/emacs/) for editing code. Pick one and learn it
+well.
+
+[spyc](https://github.com/adeptum-labs/spyc) is a terminal viewer for browsing code bases, and the tool we recommend for coding
+with AI and for reviewing what it produces. It shows the project overview, the files as a tree, the code with colors, the history
+and blame from git, all uncommitted changes as one diff and what the tests ran from the coverage reports. See the
+[AI Code of Conduct](AICodeOfConduct.md) for how to use it when reviewing.
+
+## Technology stack
+[Payara Server](https://www.payara.fish/) • [Maven](Maven.md) • [PrimeFaces](https://www.primefaces.org/) • [Lombok](Lombok.md) • [Apache DeltaSpike](https://deltaspike.apache.org/)
+
+[PrimeFaces](https://www.primefaces.org/) is what we use for fullstack Java/Jakarta EE development.
+
+Make sure you can create a minimal Jakarta EE project with Maven and deploy it locally in Payara. Please get familiarized with the above stack, how they work and how they relate.
